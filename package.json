@@ -1,0 +1,31 @@
+{
+	"name": "tch-database",
+	"version": "0.1.0",
+	"author": "Tomas Chyly <chyly@tomas-chyly.com> (https://tomas-chyly.com/en/)",
+	"license": "GPL v3",
+	"description": "SQL and NoSQL database connector, useful when access to multiple types of systems using one syntax is needed.",
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tomaschyly/Database.git"
+	},
+	"homepage": "https://github.com/tomaschyly/Database",
+	"bugs": {
+		"url": "https://github.com/tomaschyly/Database/issues"
+	},
+	"dependencies": {
+		"clone": "^2.1.2"
+	},
+	"keywords": [
+		"nedb",
+		"mongodb",
+		"mysql",
+		"database"
+	]
+}
