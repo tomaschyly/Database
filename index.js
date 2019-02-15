@@ -33,12 +33,16 @@ class Database {
 				this.engine = new MySQL (config);
 				break;
 			}
-			case 'mongodb':
-				//this.engine = new MongoDB (config);
+			case 'mongodb': {
+				const MongoDB = require ('./engine/MongoDB');
+				this.engine = new MongoDB (config);
 				break;
-			case 'nedb':
-				//this.engine = new NeDB (config);
+			}
+			case 'nedb': {
+				const NeDB = require ('./engine/NeDB');
+				this.engine = new NeDB (config);
 				break;
+			}
 			default:
 				throw Error ('Not supported Engine');
 		}
