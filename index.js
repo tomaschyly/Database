@@ -1,9 +1,23 @@
 const util = require ('util');
 const clone = require ('clone');
 
-const ConfigTemplate = {
-	//TODO
-};
+const ConfigTemplate = Object.freeze ({
+	db: {
+		host: '',
+		port: 3312,
+		username: '',
+		password: '',
+		database: '',
+		ssl: false
+	},
+	storageSystem: ENGINE_TYPES.NeDB,
+	mongodb: {
+		url: ''
+	},
+	nedb: {
+		directory: 'var/nedb'
+	}
+});
 
 const ENGINE_TYPES = Object.freeze ({
 	'MySQL': 'mysql',

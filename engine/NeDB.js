@@ -1,4 +1,5 @@
 const nedb = require ('nedb');
+const path = require ('path');
 const util = require ('util');
 const electron = require ('electron');
 const {WHERE_CONDITIONS} = require ('../index');
@@ -20,7 +21,7 @@ class NeDB {
 	 */
 	Datastore () {
 		let collection = new nedb ({
-			filename: `${(electron.app || electron.remote.app).getPath ('userData')}/${this.directory}/${this.queryInProgress.collection}.db`,
+			filename: path.join ((electron.app || electron.remote.app).getPath ('userData'), this.directory, `${this.queryInProgress.collection}.db`),
 			autoload: this.autoload
 		});
 		
