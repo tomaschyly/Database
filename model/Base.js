@@ -10,6 +10,7 @@ class Base {
 		this.table = '';
 		this.data = [];
 		this.id = null;
+		this.disableAutomaticTimestamp = false;
 	}
 
 	/**
@@ -64,6 +65,16 @@ class Base {
 		}
 
 		let saveData = extend (this.Defaults (), this.data);
+
+		if (!this.disableAutomaticTimestamp) {
+			let now = Math.round (new Date ().getTime () / 1000);
+
+			saveData.updated = now;
+
+			if (old === null) {
+				saveData.created = now;
+			}
+		}
 
 		database = new Database (this.config);
 		if (old !== null) {
