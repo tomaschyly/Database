@@ -4,6 +4,8 @@ SQL and NoSQL database connector, useful when access to multiple types of system
 
 The idea is to have one syntax which is then used to access data or execute others actions on various types of SQL and NoSQL based database systems. Useful when one app is used to access multiple database systems.
 
+The package contains also Base model which can be used to operate on database systems.
+
 ## Installation
 
 Add to your application via `npm`:
