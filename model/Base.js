@@ -5,7 +5,8 @@ class Base {
 	/**
 	 * Base initialization.
 	 */
-	constructor () {
+	constructor (config) {
+		this.config = config;
 		this.table = '';
 		this.data = [];
 		this.id = null;
@@ -32,7 +33,7 @@ class Base {
 	async Load (id) {
 		this.Reset ();
 
-		let database = new Database ();
+		let database = new Database (this.config);
 		let row = await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, id).Fetch ();
 		
 		if (row !== null) {
@@ -55,7 +56,7 @@ class Base {
 	 * Save data to DB.
 	 */
 	async Save () {
-		let database = new Database ();
+		let database = new Database (this.config);
 		let old = this.id !== null ? await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, this.id).Fetch () : null;
 
 		if (old !== null) {
@@ -64,7 +65,7 @@ class Base {
 
 		let saveData = extend (this.Defaults (), this.data);
 
-		database = new Database ();
+		database = new Database (this.config);
 		if (old !== null) {
 			await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, this.id).Update (saveData);
 		} else {
@@ -90,7 +91,7 @@ class Base {
 	 * Get number of rows in DB.
 	 */
 	async Count (filter = {}) {
-		let database = new Database ().SelectTable ('*', this.table);
+		let database = new Database (this.config).SelectTable ('*', this.table);
 
 		for (let index in filter) {
 			if (filter.hasOwnProperty (index)) {
@@ -105,7 +106,7 @@ class Base {
 	 * Get all rows from DB.
 	 */
 	async Collection (filter = {}, sort = {index: 'id', direction: 'ASC'}, limit = {limit: -1, offset: -1}, asObject = null) {
-		let database = new Database ().SelectTable ('*', this.table);
+		let database = new Database (this.config).SelectTable ('*', this.table);
 
 		for (let index in filter) {
 			if (filter.hasOwnProperty (index)) {

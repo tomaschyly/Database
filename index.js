@@ -1,3 +1,4 @@
+const path = require ('path');
 const util = require ('util');
 const clone = require ('clone');
 
@@ -15,7 +16,7 @@ const ConfigTemplate = Object.freeze ({
 		url: ''
 	},
 	nedb: {
-		directory: 'var/nedb'
+		directory: path.join ('var', 'nedb')
 	}
 });
 
