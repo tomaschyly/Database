@@ -2,6 +2,17 @@ const path = require ('path');
 const util = require ('util');
 const clone = require ('clone');
 
+const ENGINE_TYPES = Object.freeze ({
+	'MySQL': 'mysql',
+	'MongoDB': 'mongodb',
+	'NeDB': 'nedb'
+});
+
+const WHERE_CONDITIONS = Object.freeze ({
+	'Equal': 1,
+	'Like': 2
+});
+
 const ConfigTemplate = Object.freeze ({
 	db: {
 		host: '',
@@ -18,17 +29,6 @@ const ConfigTemplate = Object.freeze ({
 	nedb: {
 		directory: path.join ('var', 'nedb')
 	}
-});
-
-const ENGINE_TYPES = Object.freeze ({
-	'MySQL': 'mysql',
-	'MongoDB': 'mongodb',
-	'NeDB': 'nedb'
-});
-
-const WHERE_CONDITIONS = Object.freeze ({
-	'Equal': 1,
-	'Like': 2
 });
 
 class Database {
