@@ -39,6 +39,11 @@ class Base {
 		
 		if (row !== null) {
 			this.data = extend (this.Defaults (), row);
+
+			Object.keys (this.data).map (key => {
+				this.data [key] = decodeURIComponent (this.data [key]);
+			});
+			
 			this.id = row.id;
 		}
 
@@ -50,6 +55,11 @@ class Base {
 	 */
 	LoadFromData (data) {
 		this.data = extend (this.Defaults (), data);
+
+		Object.keys (this.data).map (key => {
+			this.data [key] = decodeURIComponent (this.data [key]);
+		});
+
 		this.id = data.id;
 	}
 
@@ -75,6 +85,10 @@ class Base {
 				saveData.created = now;
 			}
 		}
+
+		Object.keys (saveData).map (key => {
+			saveData [key] = encodeURIComponent (saveData [key]);
+		});
 
 		database = new Database (this.config);
 		if (old !== null) {
@@ -135,6 +149,12 @@ class Base {
 				let _data = data [i];
 				data [i] = new asObject ();
 				data [i].LoadFromData (_data);
+			}
+		} else if (data.length > 0) {
+			for (let i = 0; i < data.length; i++) {
+				Object.keys (data [i]).map (key => {
+					data [i] [key] = decodeURIComponent (data [i] [key]);
+				});
 			}
 		}
 
