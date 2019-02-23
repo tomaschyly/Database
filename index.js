@@ -370,6 +370,35 @@ class Database {
 
 		return result;
 	}
+
+	/**
+	 * Delete items matching current query.
+	 */
+	async Delete () {
+		let result = false;
+
+		switch (this.storageSystem) {
+			case 'mysql':
+				//TODO
+				//TODO results will need to be parsed here for unified response from here
+				break;
+			case 'mongodb':
+				//TODO
+				//TODO results will need to be parsed here for unified response from here
+				break;
+			case 'nedb': {
+				let datastore = this.engine.Datastore ();
+				datastore.remove = util.promisify (datastore.remove);
+
+				result = await datastore.remove (this.engine.Parameters (), {multi: true});
+
+				result = result >= 1;
+				break;
+			}
+		}
+
+		return result;
+	}
 }
 
 module.exports = {

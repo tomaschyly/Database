@@ -92,10 +92,11 @@ class Base {
 	 * Delete from DB.
 	 */
 	async Delete () {
-		//TODO 
-		throw Error ('Delete not implemented yet');
+		let database = new Database (this.config);
 
-		return this;
+		let deleted = await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, this.id).Delete ();
+
+		return deleted;
 	}
 
 	/**
