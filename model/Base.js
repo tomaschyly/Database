@@ -38,7 +38,7 @@ class Base {
 		let row = await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, id).Fetch ();
 		
 		if (row !== null) {
-			this.data = extend (this.Defaults (), row);
+			this.data = row;
 
 			Object.keys (this.data).map (key => {
 				this.data [key] = decodeURIComponent (this.data [key]);
@@ -54,7 +54,7 @@ class Base {
 	 * Load data from data.
 	 */
 	LoadFromData (data) {
-		this.data = extend (this.Defaults (), data);
+		this.data = data;
 
 		Object.keys (this.data).map (key => {
 			this.data [key] = decodeURIComponent (this.data [key]);
