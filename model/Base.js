@@ -61,6 +61,8 @@ class Base {
 		});
 
 		this.id = data.id;
+
+		return this;
 	}
 
 	/**
