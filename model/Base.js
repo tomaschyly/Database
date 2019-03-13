@@ -50,7 +50,7 @@ class Base {
 			Object.keys (this.data).map (key => {
 				this.data [key] = decodeURIComponent (this.data [key]);
 
-				if (this.IndexesJSON ().includes (key)) {
+				if (this.IndexesJSON ().includes (key) && typeof (this.data [key]) === 'string') {
 					this.data [key] = JSON.parse (this.data [key]);
 				}
 			});
@@ -70,7 +70,7 @@ class Base {
 		Object.keys (this.data).map (key => {
 			this.data [key] = decodeURIComponent (this.data [key]);
 
-			if (this.IndexesJSON ().includes (key)) {
+			if (this.IndexesJSON ().includes (key) && typeof (this.data [key]) === 'string') {
 				this.data [key] = JSON.parse (this.data [key]);
 			}
 		});
@@ -104,7 +104,7 @@ class Base {
 		}
 
 		Object.keys (saveData).map (key => {
-			if (this.IndexesJSON ().includes (key)) {
+			if (this.IndexesJSON ().includes (key) && typeof (saveData [key]) === 'object') {
 				saveData [key] = JSON.stringify (saveData [key]);
 			}
 
@@ -176,7 +176,7 @@ class Base {
 				Object.keys (data [i]).map (key => {
 					data [i] [key] = decodeURIComponent (data [i] [key]);
 
-					if (this.IndexesJSON ().includes (key)) {
+					if (this.IndexesJSON ().includes (key) && typeof (data [i] [key]) === 'string') {
 						data [i] [key] = JSON.parse (data [i] [key]);
 					}
 				});
