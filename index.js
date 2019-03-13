@@ -68,7 +68,15 @@ class Database {
 	 */
 	SelectTable (select, table) {
 		this.engine.queryInProgress.select = select;
-		this.engine.queryInProgress.collection = table;
+
+		switch (this.storageSystem) {
+			case 'mongodb':
+			case 'nedb':
+				this.engine.queryInProgress.collection = table;
+				break;
+			default:
+				this.engine.queryInProgress.table = table;
+		}
 
 		return this;
 	}

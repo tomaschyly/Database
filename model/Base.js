@@ -78,7 +78,7 @@ class Base {
 			}
 		});
 
-		this.id = data.id;
+		this.id = typeof (data.id) !== 'undefined' ? data.id : null;
 
 		return this;
 	}
