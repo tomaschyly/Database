@@ -48,10 +48,13 @@ class Base {
 			this.data = row;
 
 			Object.keys (this.data).map (key => {
-				this.data [key] = decodeURIComponent (this.data [key]);
-
-				if (this.IndexesJSON ().includes (key) && typeof (this.data [key]) === 'string') {
-					this.data [key] = JSON.parse (this.data [key]);
+				if (this.IndexesJSON ().includes (key)) {
+					if (typeof (this.data [key]) === 'string') {
+						this.data [key] = decodeURIComponent (this.data [key]);
+						this.data [key] = JSON.parse (this.data [key]);
+					}
+				} else {
+					this.data [key] = decodeURIComponent (this.data [key]);
 				}
 			});
 			
