@@ -29,6 +29,13 @@ class Base {
 	}
 
 	/**
+	 * Data indexes to save as JSON inside DB.
+	 */
+	IndexesJSON () {
+		return [];
+	}
+
+	/**
 	 * Load data from DB.
 	 */
 	async Load (id) {
@@ -42,6 +49,10 @@ class Base {
 
 			Object.keys (this.data).map (key => {
 				this.data [key] = decodeURIComponent (this.data [key]);
+
+				if (this.IndexesJSON.includes (key)) {
+					this.data [key] = JSON.parse (this.data [key]);
+				}
 			});
 			
 			this.id = row.id;
@@ -58,6 +69,10 @@ class Base {
 
 		Object.keys (this.data).map (key => {
 			this.data [key] = decodeURIComponent (this.data [key]);
+
+			if (this.IndexesJSON.includes (key)) {
+				this.data [key] = JSON.parse (this.data [key]);
+			}
 		});
 
 		this.id = data.id;
@@ -89,6 +104,10 @@ class Base {
 		}
 
 		Object.keys (saveData).map (key => {
+			if (this.IndexesJSON.includes (key)) {
+				saveData [key] = JSON.stringify (saveData [key]);
+			}
+
 			saveData [key] = encodeURIComponent (saveData [key]);
 		});
 
@@ -156,6 +175,10 @@ class Base {
 			for (let i = 0; i < data.length; i++) {
 				Object.keys (data [i]).map (key => {
 					data [i] [key] = decodeURIComponent (data [i] [key]);
+
+					if (this.IndexesJSON.includes (key)) {
+						data [i] [key] = JSON.parse (data [i] [key]);
+					}
 				});
 			}
 		}
