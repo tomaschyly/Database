@@ -302,9 +302,14 @@ class Database {
 				if (this.engine.queryInProgress.rows.length > 1) {
 					results = await this.engine.RawQueries (sql.split ('\n'));
 				} else {
-					results = await this.engine.RawQuery (sql);
+					results = [await this.engine.RawQuery (sql)];
 				}
-				//TODO results will need to be parsed here for unified response from here
+
+				for (let i = 0; i < results.length; i++) {
+					if (results [i] !== null) {
+						results [i] = results [i].insertId;
+					}
+				}
 				break;
 			}
 			case 'mongodb':

@@ -11,6 +11,7 @@ class Base {
 		this.data = [];
 		this.id = null;
 		this.disableAutomaticTimestamp = false;
+		this.idIsAutoIncrement = true;
 	}
 
 	/**
@@ -119,8 +120,11 @@ class Base {
 			await database.SelectTable ('*', this.table).Where ('id', WHERE_CONDITIONS.Equal, this.id).Update (saveData);
 		} else {
 			let results = await database.SelectTable ('*', this.table).Insert (saveData);
-			this.data.id = results [0];
-			this.id = results [0];
+
+			if (this.idIsAutoIncrement) {
+				this.data.id = results [0];
+				this.id = results [0];
+			}
 		}
 
 		return this;

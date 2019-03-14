@@ -113,11 +113,16 @@ class MySQL {
 	async RawQuery (query) {
 		this.connection.connect ();
 
-		let results = await this.connection.query (query);
+		let result = null;
+		try {
+			result = await this.connection.query (query);
+		} catch (e) {
+			console.log (error);
+		}
 
 		this.connection.end ();
 
-		return results;
+		return result;
 	}
 
 	/**
@@ -129,7 +134,11 @@ class MySQL {
 		let results = [];
 		for (let i = 0; i < queries.length; i++) {
 			if (queries [i] !== '') {
-				results.push (await this.connection.query (queries [i]));
+				try {
+					results.push (await this.connection.query (queries [i]));
+				} catch (e) {
+					results.push (null);
+				}
 			}
 		}
 		
