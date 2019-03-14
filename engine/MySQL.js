@@ -117,7 +117,7 @@ class MySQL {
 		try {
 			result = await this.connection.query (query);
 		} catch (e) {
-			console.log (error);
+			console.log (e);
 		}
 
 		this.connection.end ();
@@ -137,6 +137,8 @@ class MySQL {
 				try {
 					results.push (await this.connection.query (queries [i]));
 				} catch (e) {
+					console.log (e);
+					
 					results.push (null);
 				}
 			}
