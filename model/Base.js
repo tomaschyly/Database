@@ -52,7 +52,15 @@ class Base {
 				this.data [key] = decodeURIComponent (this.data [key]);
 	
 				if (this.IndexesJSON ().includes (key) && typeof (this.data [key]) === 'string') {
-					this.data [key] = JSON.parse (this.data [key]);
+					try {
+						if (this.data [key] !== '') {
+							this.data [key] = JSON.parse (this.data [key]);
+						}
+					} catch (e) {
+						console.log (e);
+
+						this.data [key] = null;
+					}
 				}
 			});
 			
@@ -71,8 +79,16 @@ class Base {
 		Object.keys (this.data).map (key => {
 			if (this.IndexesJSON ().includes (key)) {
 				if (typeof (this.data [key]) === 'string') {
-					this.data [key] = decodeURIComponent (this.data [key]);
-					this.data [key] = JSON.parse (this.data [key]);
+					try {
+						if (this.data [key] !== '') {
+							this.data [key] = decodeURIComponent (this.data [key]);
+							this.data [key] = JSON.parse (this.data [key]);
+						}
+					} catch (e) {
+						console.log (e);
+
+						this.data [key] = null;
+					}
 				}
 			} else {
 				this.data [key] = decodeURIComponent (this.data [key]);
