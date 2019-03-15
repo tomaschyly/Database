@@ -49,7 +49,7 @@ class NeDB {
 							params [(index === 'id' ? '_id' : index)] = row.value;
 							break;
 						case WHERE_CONDITIONS.Like:
-							params [(index === 'id' ? '_id' : index)] = new RegExp (row.value, 'g');
+							params [(index === 'id' ? '_id' : index)] = new RegExp (row.value, 'i');
 							break;
 						default:
 							throw Error ('Not supported Parameters where condition');
