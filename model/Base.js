@@ -158,6 +158,17 @@ class Base {
 	}
 
 	/**
+	 * Delete all from DB.
+	 */
+	async DeleteAll () {
+		let database = new Database (this.config);
+
+		let deleted = await database.SelectTable ('*', this.table).Delete ();
+
+		return deleted;
+	}
+
+	/**
 	 * Get number of rows in DB.
 	 */
 	async Count (filter = {}) {
