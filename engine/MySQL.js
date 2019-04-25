@@ -52,6 +52,18 @@ class MySQL {
 					sql += `INSERT INTO \`${this.queryInProgress.table}\` (${columns.join (', ')}) VALUES (${values.join (', ')});\n`;
 				}
 				break;
+			case 'update': {
+				let values = [];
+
+				for (let index in this.queryInProgress.row) {
+					if (this.queryInProgress.row.hasOwnProperty (index)) {
+						values.push (`${index}='${this.queryInProgress.row [index]}'`);
+					}
+				}
+
+				sql = `UPDATE \`${this.queryInProgress.table}\` SET ${values.join (', ')}`;
+				break;
+			}
 			default:
 				throw Error ('Not supported QueryToSql type');
 		}

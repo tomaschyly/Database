@@ -350,14 +350,19 @@ class Database {
 		}
 
 		row = clone (row);
+		this.engine.queryInProgress.row = row;
 
 		let result = null;
 		
 		switch (this.storageSystem) {
-			case 'mysql':
-				//TODO
-				//TODO results will need to be parsed here for unified response from here
+			case 'mysql': {
+				let sql = this.engine.QueryToSql ('update');
+
+				result = await this.engine.RawQuery (sql);
+
+				result = result.changedRows === 1;
 				break;
+			}
 			case 'mongodb':
 				//TODO
 				//TODO results will need to be parsed here for unified response from here

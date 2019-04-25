@@ -1,6 +1,6 @@
 {
 	"name": "tch-database",
-	"version": "0.4.4",
+	"version": "0.5.0",
 	"author": "Tomas Chyly <chyly@tomas-chyly.com> (https://tomas-chyly.com/en/)",
 	"license": "GPL v3",
 	"description": "SQL and NoSQL database connector, useful when access to multiple types of systems using one syntax is needed.",
