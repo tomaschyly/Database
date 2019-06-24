@@ -1,5 +1,6 @@
 const {Database, WHERE_CONDITIONS} = require ('../index');
 const extend = require ('extend');
+const clone = require ('clone');
 
 class Base {
 	/**
@@ -74,7 +75,7 @@ class Base {
 	 * Load data from data.
 	 */
 	LoadFromData (data) {
-		this.data = data;
+		this.data = clone (data);
 
 		Object.keys (this.data).map (key => {
 			if (this.IndexesJSON ().includes (key)) {
